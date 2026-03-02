@@ -1,4 +1,3 @@
-// src/users/users.resolver.ts
 import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';

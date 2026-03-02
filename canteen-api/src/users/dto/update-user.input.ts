@@ -1,4 +1,3 @@
-// src/users/dto/update-user.input.ts
 import { InputType, Field, ID } from '@nestjs/graphql';
 import { IsEnum, IsOptional, IsString, IsUUID } from 'class-validator';
 import { Role } from '../../common/enums/role.enum';

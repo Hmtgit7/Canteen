@@ -1,4 +1,3 @@
-// src/auth/dto/register.input.ts
 import { InputType, Field } from '@nestjs/graphql';
 import {
   IsEmail,
