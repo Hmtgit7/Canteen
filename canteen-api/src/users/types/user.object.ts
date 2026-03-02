@@ -1,6 +1,7 @@
 import { ObjectType, Field, ID, registerEnumType } from '@nestjs/graphql';
 import { Role } from '../../common/enums/role.enum';
 import { Country } from '../../common/enums/country.enum';
+import '../../common/enums/graphql-enums';
 
 registerEnumType(Role, { name: 'Role', description: 'User roles' });
 registerEnumType(Country, {
