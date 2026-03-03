@@ -1,9 +1,10 @@
+// src/orders/types/order.object.ts
 import { ObjectType, Field, ID, Float } from '@nestjs/graphql';
 import { OrderStatus } from '../../common/enums/graphql-enums';
 import { OrderItemObject } from './order-item.object';
 import { UserObject } from '../../users/types/user.object';
 import { RestaurantObject } from '../../restaurants/types/restaurant.object';
-import { PaymentMethodObject } from '@/payments/types/payment-method.object';
+import { PaymentMethodObject } from '../../payments/types/payment-method.object';
 
 @ObjectType()
 export class OrderObject {
@@ -16,22 +17,22 @@ export class OrderObject {
   @Field(() => Float)
   totalAmount!: number;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   notes?: string | null;
 
-  @Field()
+  @Field(() => String)
   userId!: string;
 
-  @Field()
+  @Field(() => String)
   restaurantId!: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   paymentId?: string | null;
 
-  @Field()
+  @Field(() => Date)
   createdAt!: Date;
 
-  @Field()
+  @Field(() => Date)
   updatedAt!: Date;
 
   @Field(() => [OrderItemObject], { nullable: true })

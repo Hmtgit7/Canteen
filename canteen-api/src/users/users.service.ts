@@ -90,7 +90,7 @@ export class UsersService {
     return this.mapUser(updated);
   }
 
-  private mapUser(user: User): UserObject {
+  private mapUser = (user: User): UserObject => {
     return {
       id: user.id,
       email: user.email,
@@ -102,5 +102,5 @@ export class UsersService {
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     };
-  }
+  };
 }

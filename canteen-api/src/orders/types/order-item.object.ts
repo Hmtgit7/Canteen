@@ -15,10 +15,10 @@ export class OrderItemObject {
   @Field(() => Float)
   subtotal!: number;
 
-  @Field()
+  @Field(() => String)
   menuItemId!: string;
 
-  @Field()
+  @Field(() => String)
   orderId!: string;
 
   @Field(() => MenuItemObject, { nullable: true })

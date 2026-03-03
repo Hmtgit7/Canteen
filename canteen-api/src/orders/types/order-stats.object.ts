@@ -1,8 +1,9 @@
+// src/orders/types/order-stats.object.ts
 import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 
 @ObjectType()
 export class OrderStatusCount {
-  @Field()
+  @Field(() => String)
   status!: string;
 
   @Field(() => Int)

@@ -1,23 +1,17 @@
-import { ObjectType, Field, ID, registerEnumType } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { Role } from '../../common/enums/role.enum';
 import { Country } from '../../common/enums/country.enum';
 import '../../common/enums/graphql-enums';
-
-registerEnumType(Role, { name: 'Role', description: 'User roles' });
-registerEnumType(Country, {
-  name: 'Country',
-  description: 'Supported countries',
-});
 
 @ObjectType()
 export class UserObject {
   @Field(() => ID)
   id!: string;
 
-  @Field()
+  @Field(() => String)
   email!: string;
 
-  @Field()
+  @Field(() => String)
   name!: string;
 
   @Field(() => Role)
@@ -26,15 +20,15 @@ export class UserObject {
   @Field(() => Country)
   country!: Country;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   avatar?: string | null;
 
-  @Field()
+  @Field(() => Boolean)
   isActive!: boolean;
 
-  @Field()
+  @Field(() => Date)
   createdAt!: Date;
 
-  @Field()
+  @Field(() => Date)
   updatedAt!: Date;
 }

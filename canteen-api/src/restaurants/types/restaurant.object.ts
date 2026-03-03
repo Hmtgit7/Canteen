@@ -7,25 +7,25 @@ export class RestaurantObject {
   @Field(() => ID)
   id!: string;
 
-  @Field()
+  @Field(() => String)
   name!: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   description?: string | null;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   imageUrl?: string | null;
 
-  @Field()
+  @Field(() => String)
   cuisine!: string;
 
   @Field(() => Country)
   country!: Country;
 
-  @Field()
+  @Field(() => String)
   city!: string;
 
-  @Field()
+  @Field(() => String)
   address!: string;
 
   @Field(() => Float)
@@ -34,24 +34,24 @@ export class RestaurantObject {
   @Field(() => Int)
   reviewCount!: number;
 
-  @Field()
+  @Field(() => Boolean)
   isActive!: boolean;
 
-  @Field()
+  @Field(() => String)
   openTime!: string;
 
-  @Field()
+  @Field(() => String)
   closeTime!: string;
 
   @Field(() => [MenuItemObject], { nullable: true })
   menuItems?: MenuItemObject[];
 
-  @Field()
+  @Field(() => Boolean)
   isFavorited!: boolean;
 
-  @Field()
+  @Field(() => Date)
   createdAt!: Date;
 
-  @Field()
+  @Field(() => Date)
   updatedAt!: Date;
 }

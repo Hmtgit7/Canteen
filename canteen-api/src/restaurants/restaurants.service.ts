@@ -306,7 +306,7 @@ export class RestaurantsService {
     };
   }
 
-  private mapMenuItem(this: void, item: MenuItem): MenuItemObject {
+  private mapMenuItem = (item: MenuItem): MenuItemObject => {
     return {
       id: item.id,
       name: item.name,
@@ -321,5 +321,5 @@ export class RestaurantsService {
       createdAt: item.createdAt,
       updatedAt: item.updatedAt,
     };
-  }
+  };
 }

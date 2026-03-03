@@ -78,7 +78,7 @@ export class AuthService {
     return this.jwtService.sign(payload);
   }
 
-  private mapUser(user: User): AuthResponse['user'] {
+  private mapUser = (user: User): AuthResponse['user'] => {
     return {
       id: user.id,
       email: user.email,
@@ -90,5 +90,5 @@ export class AuthService {
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     };
-  }
+  };
 }

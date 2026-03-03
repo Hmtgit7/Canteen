@@ -5,36 +5,36 @@ export class MenuItemObject {
   @Field(() => ID)
   id!: string;
 
-  @Field()
+  @Field(() => String)
   name!: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   description?: string | null;
 
   @Field(() => Float)
   price!: number;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   imageUrl?: string | null;
 
-  @Field()
+  @Field(() => String)
   category!: string;
 
-  @Field()
+  @Field(() => Boolean)
   isAvailable!: boolean;
 
-  @Field()
+  @Field(() => Boolean)
   isVeg!: boolean;
 
   @Field(() => Int, { nullable: true })
   calories?: number | null;
 
-  @Field()
+  @Field(() => String)
   restaurantId!: string;
 
-  @Field()
+  @Field(() => Date)
   createdAt!: Date;
 
-  @Field()
+  @Field(() => Date)
   updatedAt!: Date;
 }

@@ -1,0 +1,329 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AddOrderItemInput {
+  menuItemId: ID!
+  orderId: ID!
+  quantity: Int!
+}
+
+type AuthResponse {
+  accessToken: String!
+  user: UserObject!
+}
+
+input CheckoutOrderInput {
+  orderId: ID!
+  paymentMethodId: ID!
+}
+
+"""Supported countries"""
+enum Country {
+  AMERICA
+  INDIA
+}
+
+input CreateMenuItemInput {
+  calories: Int
+  category: String!
+  description: String
+  imageUrl: String
+  isAvailable: Boolean = true
+  isVeg: Boolean = false
+  name: String!
+  price: Float!
+  restaurantId: ID!
+}
+
+input CreateOrderInput {
+  notes: String
+  restaurantId: ID!
+}
+
+input CreatePaymentMethodInput {
+  isDefault: Boolean = false
+  label: String!
+  last4: String
+  type: PaymentType!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type MenuItemObject {
+  calories: Int
+  category: String!
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  imageUrl: String
+  isAvailable: Boolean!
+  isVeg: Boolean!
+  name: String!
+  price: Float!
+  restaurantId: String!
+  updatedAt: DateTime!
+}
+
+type Mutation {
+  """Add a menu item to an existing cart"""
+  addOrderItem(input: AddOrderItemInput!): OrderObject!
+
+  """Cancel an order — Admin/Manager only"""
+  cancelOrder(orderId: ID!): OrderObject!
+
+  """Checkout cart with a payment method — Admin/Manager only"""
+  checkoutOrder(input: CheckoutOrderInput!): OrderObject!
+
+  """Create a menu item (Admin/Manager only)"""
+  createMenuItem(input: CreateMenuItemInput!): MenuItemObject!
+
+  """Create a new order/cart at a restaurant"""
+  createOrder(input: CreateOrderInput!): OrderObject!
+
+  """Add a payment method — Admin only"""
+  createPaymentMethod(input: CreatePaymentMethodInput!): PaymentMethodObject!
+
+  """Deactivate a user (Admin only)"""
+  deactivateUser(id: ID!): UserObject!
+
+  """Delete a payment method — Admin only"""
+  deletePaymentMethod(id: ID!): Boolean!
+
+  """Login with email and password"""
+  login(input: LoginInput!): AuthResponse!
+
+  """Register a new user"""
+  register(input: RegisterInput!): AuthResponse!
+
+  """Toggle favorite status for a restaurant"""
+  toggleFavorite(restaurantId: ID!): Boolean!
+
+  """Update a menu item (Admin/Manager only)"""
+  updateMenuItem(input: UpdateMenuItemInput!): MenuItemObject!
+
+  """Update item quantity in cart (0 removes the item)"""
+  updateOrderItem(input: UpdateOrderItemInput!): OrderObject!
+
+  """Update order status — Admin/Manager only"""
+  updateOrderStatus(orderId: ID!, status: OrderStatus!): OrderObject!
+
+  """Update a payment method — Admin only"""
+  updatePaymentMethod(input: UpdatePaymentMethodInput!): PaymentMethodObject!
+
+  """Update user profile or role"""
+  updateUser(input: UpdateUserInput!): UserObject!
+}
+
+type OrderItemObject {
+  id: ID!
+  menuItem: MenuItemObject
+  menuItemId: String!
+  orderId: String!
+  quantity: Int!
+  subtotal: Float!
+  unitPrice: Float!
+}
+
+type OrderObject {
+  createdAt: DateTime!
+  id: ID!
+  items: [OrderItemObject!]
+  notes: String
+  payment: PaymentMethodObject
+  paymentId: String
+  restaurant: RestaurantObject
+  restaurantId: String!
+  status: OrderStatus!
+  totalAmount: Float!
+  updatedAt: DateTime!
+  user: UserObject
+  userId: String!
+}
+
+type OrderStatsObject {
+  activeOrders: Int!
+  averageOrderValue: Float!
+  byStatus: [OrderStatusCount!]!
+  totalOrders: Int!
+  totalRevenue: Float!
+}
+
+"""Order lifecycle status"""
+enum OrderStatus {
+  CANCELLED
+  CART
+  CONFIRMED
+  DELIVERED
+  PENDING
+  PREPARING
+}
+
+type OrderStatusCount {
+  count: Int!
+  status: String!
+}
+
+type PaginatedRestaurants {
+  hasNextPage: Boolean!
+  items: [RestaurantObject!]!
+  page: Int!
+  pageSize: Int!
+  total: Int!
+}
+
+type PaymentMethodObject {
+  createdAt: DateTime!
+  id: ID!
+  isDefault: Boolean!
+  label: String!
+  last4: String
+  type: PaymentType!
+  updatedAt: DateTime!
+  userId: String!
+}
+
+"""Payment method types"""
+enum PaymentType {
+  BANK_TRANSFER
+  CARD
+  UPI
+  WALLET
+}
+
+type Query {
+  """Get all orders — Admin/Manager only"""
+  allOrders: [OrderObject!]!
+
+  """Get distinct cuisine types available to the user"""
+  cuisines: [String!]!
+
+  """Get current logged-in user"""
+  me: UserObject!
+
+  """Get all available menu items for a restaurant"""
+  menuItems(restaurantId: ID!): [MenuItemObject!]!
+
+  """Get current user cart orders"""
+  myCart: [OrderObject!]!
+
+  """Get current user's favorited restaurants"""
+  myFavorites: [RestaurantObject!]!
+
+  """Get current user order history"""
+  myOrders: [OrderObject!]!
+
+  """Get current user payment methods"""
+  myPaymentMethods: [PaymentMethodObject!]!
+
+  """Get order stats for dashboard — Admin/Manager only"""
+  orderStats: OrderStatsObject!
+
+  """Get a single restaurant with its menu"""
+  restaurant(id: ID!): RestaurantObject!
+
+  """Get all restaurants with optional filters and pagination"""
+  restaurants(filter: RestaurantFilterInput): PaginatedRestaurants!
+
+  """Get all users (Admin/Manager)"""
+  users: [UserObject!]!
+}
+
+input RegisterInput {
+  country: Country!
+  email: String!
+  name: String!
+  password: String!
+  role: Role
+}
+
+input RestaurantFilterInput {
+  city: String
+  country: Country
+  cuisine: String
+  page: Int = 1
+  pageSize: Int = 10
+  search: String
+}
+
+type RestaurantObject {
+  address: String!
+  city: String!
+  closeTime: String!
+  country: Country!
+  createdAt: DateTime!
+  cuisine: String!
+  description: String
+  id: ID!
+  imageUrl: String
+  isActive: Boolean!
+  isFavorited: Boolean!
+  menuItems: [MenuItemObject!]
+  name: String!
+  openTime: String!
+  rating: Float!
+  reviewCount: Int!
+  updatedAt: DateTime!
+}
+
+"""User roles"""
+enum Role {
+  ADMIN
+  MANAGER
+  MEMBER
+}
+
+type Subscription {
+  """Real-time order status updates"""
+  orderUpdated: OrderObject!
+}
+
+input UpdateMenuItemInput {
+  calories: Int
+  category: String
+  description: String
+  id: ID!
+  imageUrl: String
+  isAvailable: Boolean
+  isVeg: Boolean
+  name: String
+  price: Float
+}
+
+input UpdateOrderItemInput {
+  orderItemId: ID!
+  quantity: Int!
+}
+
+input UpdatePaymentMethodInput {
+  id: ID!
+  isDefault: Boolean
+  label: String
+}
+
+input UpdateUserInput {
+  avatar: String
+  id: ID!
+  name: String
+  role: Role
+}
+
+type UserObject {
+  avatar: String
+  country: Country!
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+  isActive: Boolean!
+  name: String!
+  role: Role!
+  updatedAt: DateTime!
+}

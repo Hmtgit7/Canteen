@@ -1,3 +1,4 @@
+// src/payments/types/payment-method.object.ts
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { PaymentType } from '../../common/enums/graphql-enums';
 
@@ -9,21 +10,21 @@ export class PaymentMethodObject {
   @Field(() => PaymentType)
   type!: PaymentType;
 
-  @Field()
+  @Field(() => String)
   label!: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   last4?: string | null;
 
-  @Field()
+  @Field(() => Boolean)
   isDefault!: boolean;
 
-  @Field()
+  @Field(() => String)
   userId!: string;
 
-  @Field()
+  @Field(() => Date)
   createdAt!: Date;
 
-  @Field()
+  @Field(() => Date)
   updatedAt!: Date;
 }
