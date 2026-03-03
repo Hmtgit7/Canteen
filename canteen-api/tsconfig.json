@@ -16,9 +16,14 @@
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
+    "noImplicitAny": true,
+    "strictBindCallApply": true,
+    "noFallthroughCasesInSwitch": false,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    "paths": {
+      "@/*": ["src/*"],
+      "generated/prisma": ["../generated/prisma"],
+      "generated/prisma/*": ["../generated/prisma/*"]
+    }
   }
 }
